@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather PWA</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <h1>Weather PWA</h1>
+        <div class="input-section">
+            <input type="text" id="zipcode" placeholder="Enter Zipcode">
+            <select id="country">
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <!-- Add more countries as needed -->
+            </select>
+            <select id="period">
+                <option value="7">7 days</option>
+                <option value="14">14 days</option>
+                <option value="30">30 days</option>
+            </select>
+            <button id="fetchWeather">Fetch Weather</button>
+        </div>
+        <div id="weatherResult" style="display:none;">
+            <h2>Weather Results</h2>
+            <textarea id="weatherData" readonly rows="10"></textarea>
+            <div class="image-container">
+                <figure>
+                    <figcaption>Temperature vs Humidity</figcaption>
+                    <img id="weatherImage" alt="Weather Graph">
+                </figure>
+                <figure>
+                    <figcaption>Temperature and Humidity Distribution</figcaption>
+                    <img id="boxplotImage" alt="Boxplot Graph">
+                </figure>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>
