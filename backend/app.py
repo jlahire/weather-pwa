@@ -1,29 +1,18 @@
-from flask import Flask, request, jsonify, send_file
-from flask_cors import CORS
+import sys
+import json
 from noaa_sdk import NOAA
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import io
 import base64
 
-app = Flask(__name__)
-CORS(app)
-
-@app.route('/get_weather', methods=['POST'])
-def get_weather():
-    data = request.json
-    zipcode = data['zipcode']
-    country = data['country']
-    period = int(data['period'])
-
-    # Calculate date range
+def get_weather(zipcode, country, period):
+    # data range stuff
     end_date = datetime.now()
-    start_date = end_date - timedelta(days=period)
-
+    start_date = end_date - timedelta(days=int(period))
+    # yay noaa 
     n = NOAA()
-    observations = n.get_observations(zipcode, country, 
-                                      start=start_date.strftime('%Y-%m-%d'),
-                                      end=end_date.strftime('%Y-%m-%d'))
+    observations = n.get_observations(zipcode, country, start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'))
 
     temp = []
     humidity = []
@@ -36,36 +25,38 @@ def get_weather():
             humidity.append(obs['relativeHumidity']['value'])
         descriptions.append(f"{obs['timestamp']}: {obs['textDescription']}")
 
-    # Generate plots
+    # plots
     weather_img = generate_weather_plot(temp, humidity)
     boxplot_img = generate_boxplot(temp, humidity)
 
-    # Calculate statistics
+    # stat
     avg_temp = sum(temp) / len(temp) if temp else None
     low_temp = min(temp) if temp else None
     high_temp = max(temp) if temp else None
 
     weather_text = f"Weather Statistics for {zipcode}, {country}\n"
     weather_text += f"Period: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}\n"
-    weather_text += f"Average temperature: {avg_temp:.2f}°C\n"
-    weather_text += f"Lowest temperature: {low_temp:.2f}°C\n"
-    weather_text += f"Highest temperature: {high_temp:.2f}°C\n\n"
+    weather_text += f"Average temperature: {avg_temp:.2f}°C\n" if avg_temp is not None else "Average temperature: N/A\n"
+    weather_text += f"Lowest temperature: {low_temp:.2f}°C\n" if low_temp is not None else "Lowest temperature: N/A\n"
+    weather_text += f"Highest temperature: {high_temp:.2f}°C\n" if high_temp is not None else "Highest temperature: N/A\n"
     weather_text += "Recent observations:\n"
-    weather_text += "\n".join(descriptions[-5:])  # Last 5 observations
+    weather_text += "\n".join(descriptions[-5:])  # Last 5 obs
 
-    return jsonify({
+    return json.dumps({
         'weather_text': weather_text,
         'weather_image': weather_img,
         'boxplot_image': boxplot_img
     })
 
 def generate_weather_plot(temp, humidity):
+    # this was a copy&paste where I just changed the labels and title...
     plt.figure(figsize=(10, 6))
     plt.plot(temp, label="Temperature (°C)")
     plt.plot(humidity, label='Humidity (%)')
     plt.legend()
     plt.title('Temperature vs Humidity')
-    
+    # thank you overstack for this code to get base64 from png
+    # geekforgeeks article talked about how this is much easier to push to frontend
     img_buf = io.BytesIO()
     plt.savefig(img_buf, format='png')
     img_buf.seek(0)
@@ -74,7 +65,9 @@ def generate_weather_plot(temp, humidity):
     
     return f"data:image/png;base64,{img_base64}"
 
+
 def generate_boxplot(temp, humidity):
+    # yay complicated boxplot shit
     plt.figure(figsize=(10, 6))
     box_data = [temp, humidity]
     plt.boxplot(box_data, labels=['Temperature (°C)', 'Humidity (%)'])
@@ -89,4 +82,13 @@ def generate_boxplot(temp, humidity):
     return f"data:image/png;base64,{img_base64}"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    if len(sys.argv) != 4:
+        print(json.dumps({'error': 'Invalid arguments'}))
+        sys.exit(1)
+
+    zipcode = sys.argv[1]
+    country = sys.argv[2]
+    period = sys.argv[3]
+
+    result = get_weather(zipcode, country, period)
+    print(result)  # <-- hopefully Netlify catches this!

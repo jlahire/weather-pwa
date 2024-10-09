@@ -33,29 +33,56 @@ This whole project came about while I was attending the live class for my CEIS11
   sw.js
 README.md
 ```
+4. Set up Heroku
+5. Realize Heroku isn't free
+6. Set up Netlify
+7. 
+Updated file structure for Netlify:
+
+```
+/backend
+  app.py
+  requirements.txt
+/frontend
+  /css
+    style.css
+  /js
+    app.js
+  index.html
+  manifest.json
+  sw.js
+/netlify
+  /functions
+    weather.js
+netlify.toml
+README.md
+```
 
 ### Development Process
 
 1. Used Google to find templates for frontend files (index.html, manifest.json, sw.js).
-     a. Becaue of the previous projects I've done creating PWA's I knew that at minimum I needed to
-        have these files. It didn't take long to find templates to get me started. 
+  a. Becaue of the previous projects I've done creating PWA's I knew that at minimum I needed to have these files. It didn't take long to find templates to get me started. I also used https://copy-paste-css.com/ for most of the styles.
 3. I integrated existing Python functions into app.py for backend functionality.
-     a. I have no idea how to do this. Probably going to spend a lot of time researching this. I am
-        actively avoiding using any AI in this process. The temptation is very real to just plug my
-        .py into GPT and say "make this into a flask app."
+  a. I have no idea how to do this. Probably going to spend a lot of time researching this. I am actively avoiding using any AI in this process. The temptation is very real to just plug my .py into GPT and say "make this into a flask app."
 5. Researched common Python libraries for PWA backends using Heroku through Stack Overflow.
 6. Discovered Flask as a popular choice, aligning with my previous experience.
 7. Found a helpful freeCodeCamp video tutorial on Flask PWA projects with Heroku hosting: [Flask Course - Python Web Application Development](https://youtu.be/Z1RJmh_OqeA?si=dsNZxf5VmjPw_G4g)
+8. Realized I needed to use Netlify instead of Heroku so it's back to the drawing board.
+9. Back to google...found https://vite-pwa-org.netlify.app/deployment/netlify.html and started reading.
+10. Basically rewrote my app.py. I scoured https://www.netlify.com/blog/tags/python/ looking for something similar and while I found a few I ended up 
 
 ## Challenges and Solutions
 
 1. How do I integrate my existing python file into app.py for backend functionality.
+2. Realized the Heroku is no longer free so had to switch to Netlify as my backend host. I've done a lot of projects in the past with Netlify so I knew I needed to change a ton of things in these files. I had to redo my whole backend, dropped flask, and everything that was a Heroku thing and redid a lot of the styles. Redoing app.js/index.html was difficult because I don't really know .js or .html. For most of the information to build a Netlify backend I went to Vite PWA (see resources). 
 
 ## Resources
 
 - Stack Overflow
 - GeeksforGeeks
 - freeCodeCamp YouTube tutorial
+- Vite PWA Plugin
+- Copy and Paste CSS
 
 ## Next Steps
 
