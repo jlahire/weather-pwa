@@ -75,7 +75,7 @@ README.md
 ## Challenges and Solutions
 
 1. How do I integrate my existing python file into app.py for backend functionality.
-2. Realized the Heroku is no longer free so had to switch to Netlify as my backend host. I've done a lot of projects in the past with Netlify so I knew I needed to change a ton of things in these files. I had to redo my whole backend, dropped flask, and everything that was a Heroku thing and redid a lot of the styles. Redoing app.js/index.html was difficult because I don't really know .js or .html. For most of the information to build a Netlify backend I went to Vite PWA (see resources). 
+2. Realized the Heroku is no longer free so had to switch to Netlify as my backend host. I've done a lot of projects in the past with Netlify so I knew I needed to change a ton of things in these files. I had to redo my whole backend, dropped flask, and everything that was a Heroku thing and redid a lot of the styles. Redoing app.js/index.html was difficult because I don't really know .js or .html. For most of the information to build a Netlify backend I went to Vite PWA (see resources).
 
 ## Resources
 
@@ -92,3 +92,7 @@ WIP
 ## Contribution
 
 This is a personal learning project, but suggestions and advice are welcome!
+
+Helpful projects I found that had some useful content: 
+  https://github.com/noazark/weatherjs.com
+  https://www.npmjs.com/package/weather-js
