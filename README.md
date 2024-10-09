@@ -69,7 +69,7 @@ README.md
 7. Found a helpful freeCodeCamp video tutorial on Flask PWA projects with Heroku hosting: [Flask Course - Python Web Application Development](https://youtu.be/Z1RJmh_OqeA?si=dsNZxf5VmjPw_G4g)
 8. Realized I needed to use Netlify instead of Heroku so it's back to the drawing board.
 9. Back to google...found https://vite-pwa-org.netlify.app/deployment/netlify.html and started reading.
-10. Basically rewrote my app.py. I scoured https://www.netlify.com/blog/tags/python/ looking for something similar and while I found a few I ended up 
+10. Basically rewrote my app.py. I scoured https://www.netlify.com/blog/tags/python/ looking for something similar and while I found a few I ended up getting bits and pieces from overstock and geekforgeeks and just random google results...this is difficult.
 
 ## Challenges and Solutions
 
