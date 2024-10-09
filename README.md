@@ -71,6 +71,7 @@ README.md
 8. Realized I needed to use Netlify instead of Heroku so it's back to the drawing board.
 9. Back to google...found https://vite-pwa-org.netlify.app/deployment/netlify.html and started reading.
 10. Basically rewrote my app.py. I scoured https://www.netlify.com/blog/tags/python/ looking for something similar and while I found a few I ended up getting bits and pieces from overstock and geekforgeeks and just random google results...this is difficult.
+11. Used https://www.netlify.com/blog/2017/10/31/service-workers-explained/ to learn a little more about using service workers with netlify. It helped with some of the writing of that code. I definitely copy & pasted some of it directly to my code because it was easier than typing it out myself.
 
 ## Challenges and Solutions
 
@@ -84,6 +85,7 @@ README.md
 - freeCodeCamp YouTube tutorial
 - Vite PWA Plugin
 - Copy and Paste CSS
+- Netlify Blogs
 
 ## Next Steps
 
