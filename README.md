@@ -36,7 +36,8 @@ README.md
 4. Set up Heroku
 5. Realize Heroku isn't free
 6. Set up Netlify
-7. 
+7. Mourn the loss of my sleep
+
 Updated file structure for Netlify:
 
 ```
