@@ -49,7 +49,6 @@ def get_weather(zipcode, country, period):
     })
 
 def generate_weather_plot(temp, humidity):
-    # this was a copy&paste where I just changed the labels and title...
     plt.figure(figsize=(10, 6))
     plt.plot(temp, label="Temperature (°C)")
     plt.plot(humidity, label='Humidity (%)')
@@ -67,11 +66,11 @@ def generate_weather_plot(temp, humidity):
 
 
 def generate_boxplot(temp, humidity):
-    # yay complicated boxplot shit
+    # yay complicated boxplot
     plt.figure(figsize=(10, 6))
     box_data = [temp, humidity]
     plt.boxplot(box_data, labels=['Temperature (°C)', 'Humidity (%)'])
-    plt.title('Box Plot of Temperature and Humidity')
+    plt.title('Temperature and Humidity')
     
     img_buf = io.BytesIO()
     plt.savefig(img_buf, format='png')
