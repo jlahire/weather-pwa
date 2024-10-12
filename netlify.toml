@@ -1,6 +1,6 @@
 [build]
-  publish = "frontend"  # Directory with your static files
-  functions = "netlify/functions"  # Directory with your Netlify functions
+  publish = "frontend"
+  functions = "netlify/functions"
   command = "pip install -r requirements.txt"
 
 [dev]
@@ -11,7 +11,6 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
-
 
 [build.environment]
   PYTHON_VERSION = "3.8"
