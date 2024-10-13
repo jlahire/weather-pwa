@@ -58,6 +58,27 @@ Updated file structure for Netlify:
 netlify.toml
 README.md
 ```
+New updated file structure:
+
+```
+/frontend
+  /css
+    style.css
+  /js
+    app.js
+  index.html
+  manifest.json
+  sw.js
+/netlify
+  /functions
+    weather.js
+app.py
+build.sh
+netlify.toml
+README.md
+requirements.txt
+runtime.txt
+```
 
 ### Development Process
 
