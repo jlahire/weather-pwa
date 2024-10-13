@@ -69,7 +69,7 @@ def generate_boxplot(temp, humidity):
     # yay complicated boxplot
     plt.figure(figsize=(10, 6))
     box_data = [temp, humidity]
-    plt.boxplot(box_data, labels=['Temperature (°C)', 'Humidity (%)'])
+    plt.boxplot(box_data, tick_labels=['Temperature (°C)', 'Humidity (%)'])
     plt.title('Temperature and Humidity')
     
     img_buf = io.BytesIO()
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     zipcode = sys.argv[1]
     country = sys.argv[2]
-    period = sys.argv[3]
+    period = int(sys.argv[3])
 
     result = get_weather(zipcode, country, period)
-    print(result)  # <-- hopefully Netlify catches this!
+    print(json.dumps(result))  # <-- hopefully Netlify catches this!

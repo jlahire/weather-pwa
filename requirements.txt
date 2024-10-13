@@ -1,2 +1,2 @@
-noaa_sdk
-matplotlib
+noaa_sdk==0.1.21
+matplotlib==3.4.3

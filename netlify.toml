@@ -1,7 +1,7 @@
 [build]
   publish = "frontend"
   functions = "netlify/functions"
-  command = "pip install -r requirements.txt"
+  command = "bash build.sh"
 
 [dev]
   publish = "frontend"

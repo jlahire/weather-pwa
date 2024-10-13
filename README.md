@@ -72,11 +72,53 @@ README.md
 9. Back to google...found https://vite-pwa-org.netlify.app/deployment/netlify.html and started reading.
 10. Basically rewrote my app.py. I scoured https://www.netlify.com/blog/tags/python/ looking for something similar and while I found a few I ended up getting bits and pieces from overstock and geekforgeeks and just random google results...this is difficult.
 11. Used https://www.netlify.com/blog/2017/10/31/service-workers-explained/ to learn a little more about using service workers with netlify. It helped with some of the writing of that code. I definitely copy & pasted some of it directly to my code because it was easier than typing it out myself.
+12. Link GitHub repo with Netlify and run a deploy.
+13. Spend a few hours reading Netlify + Python deploy blog posts becuase of build issues.
+
 
 ## Challenges and Solutions
 
 1. How do I integrate my existing python file into app.py for backend functionality.
 2. Realized the Heroku is no longer free so had to switch to Netlify as my backend host. I've done a lot of projects in the past with Netlify so I knew I needed to change a ton of things in these files. I had to redo my whole backend, dropped flask, and everything that was a Heroku thing and redid a lot of the styles. Redoing app.js/index.html was difficult because I don't really know .js or .html. For most of the information to build a Netlify backend I went to Vite PWA (see resources).
+3. Realizing that Netlify doesn't have great Python support. Unfortunately Netlify only supports Python 3.8...and I wrote this using Python 3.11...So I've got a few issues to figure out.
+Once I had my PWA up on Netlify I attempted to fetch some weather. Here is the error I got in my Netlify log: 
+'''
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  Error: Error: Command failed: python3 app.py 30350 US 7
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  /bin/sh: python3: command not found
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at ChildProcess.exithandler (node:child_process:422:12)
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at ChildProcess.emit (node:events:517:28)
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at maybeClose (node:internal/child_process:1098:16)
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at Socket.<anonymous> (node:internal/child_process:450:11)
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at Socket.emit (node:events:517:28)
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at Pipe.<anonymous> (node:net:350:12) {
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    code: 127,
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    killed: false,
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    signal: null,
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    cmd: 'python3 app.py 30350 US 7',
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stdout: '',
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stderr: '/bin/sh: python3: command not found\n'
+Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  }
+'''
+Left me pretty distraught. I had zero idea how to fix this issue because what this tells me is that python isn't found in the environment where my Netlify function is funning which did not initailly make sense to me. 
+---
+After doing a little research it turns out this is a common issue with Netlify.
+---
+So I had a few things I needed to do to resolve this issue.
+  1. look up how to make netlify run python effectively so I don't have to rewrite the program in java/node.js.
+  2. read this: https://docs.netlify.com/configure-builds/manage-dependencies/ 
+4. So I found out I need to use nvm(Node Version Manager) to get pyenv installed and added to my $PATH so I can have Netlify use it to install python 3.8.
+  1.  So I went to the nvm repo: https://github.com/nvm-sh/nvm/blob/master/README.md#install--update-script and found this .sh to install and update nvm: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash 
+5. So I started building a build.sh file.
+  1. Because I've worked with Linux machines for a few years I'm thankfully atleast familiar with building a .sh script to be executed. 
+  2. I went to the pyenv repo to learn about it and how to call it in a script appropriately: https://github.com/pyenv/pyenv 
+  3. I added lines to install python and upgrade it
+  4. added my pip install -r requirements.txt here so that it is still executed.
+6. Needed to restructure my files since I'm changing the build. 
+  1. I moved app.py to root. 
+  2. Deleted backend directory since it is now empty.
+7. The most difficult part of all of this is checking/updating my files to make sure that everything will work together.
+  1. weather.js: This file was probably the most difficult for me to put together and keep up with. I knew from previous projects using .js that I needed to manage error handling. This slideshow presentation: https://www.slideshare.net/slideshow/enterprise-javascript-error-handling-presentation/630870 was extremely helpful in getting an idea of how I wanted to set everything up.. I welcome input on this as I'm still very inexperienced with java anything. The most difficult part was learning the child process of running a python file and then writing the code to execute the python script. I definitely copy and pasted this part and added my sanitized strings. The error handling was difficult to figure out. I ended up finding an image on google that had error codes along with descriptions and used that for writing my error messages.
+
 
 ## Resources
 
@@ -85,7 +127,7 @@ README.md
 - freeCodeCamp YouTube tutorial
 - Vite PWA Plugin
 - Copy and Paste CSS
-- Netlify Blogs
+- Netlify Blogs/Docs
 
 ## Next Steps
 
