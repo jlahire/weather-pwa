@@ -120,6 +120,22 @@ So I had a few things I needed to do to resolve this issue.
   1. weather.js: This file was probably the most difficult for me to put together and keep up with. I knew from previous projects using .js that I needed to manage error handling. This slideshow presentation: https://www.slideshare.net/slideshow/enterprise-javascript-error-handling-presentation/630870 was extremely helpful in getting an idea of how I wanted to set everything up.. I welcome input on this as I'm still very inexperienced with java anything. The most difficult part was learning the child process of running a python file and then writing the code to execute the python script. I definitely copy and pasted this part and added my sanitized strings. The error handling was difficult to figure out. I ended up finding an image on google that had error codes along with descriptions and used that for writing my error messages.
 8. Well I got the netlify to deploy but still ran into the same issue. I htink that I need to recheck my build.sh.
   1. I'm glad I checked this. I ran through the build logs for my netlify and figured instaed of using pyenv to install python 3.8 I would "manually install 3.8 and run app.py with the python command not python3. I have had this work for me in some situations so maybe i'll get lucky with this fix. 
+9. Nope. Still can't figure out why this wont run app.py. Here is the error i'm getting now and I'm not sure it's much different from the last one that I got. 
+'''
+Oct 12, 10:11:21 PM: 62582187 ERROR  Error: Error: spawn /var/task/python/bin/python ENOENT
+Oct 12, 10:11:21 PM: 62582187 ERROR      at ChildProcess._handle.onexit (node:internal/child_process:284:19)
+Oct 12, 10:11:21 PM: 62582187 ERROR      at onErrorNT (node:internal/child_process:477:16)
+Oct 12, 10:11:21 PM: 62582187 ERROR      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  Oct 12, 10:11:21 PM: 62582187 ERROR    errno: -2,
+  Oct 12, 10:11:21 PM: 62582187 ERROR    code: 'ENOENT',
+  Oct 12, 10:11:21 PM: 62582187 ERROR    syscall: 'spawn /var/task/python/bin/python',
+  Oct 12, 10:11:21 PM: 62582187 ERROR    path: '/var/task/python/bin/python',
+  Oct 12, 10:11:21 PM: 62582187 ERROR    spawnargs: [ '/var/task/app.py', '30120', 'US', '14' ],
+  Oct 12, 10:11:21 PM: 62582187 ERROR    cmd: '/var/task/python/bin/python /var/task/app.py 30120 US 14',
+  Oct 12, 10:11:21 PM: 62582187 ERROR    stdout: '',
+  Oct 12, 10:11:21 PM: 62582187 ERROR    stderr: ''
+  Oct 12, 10:11:21 PM: 62582187 ERROR  }
+'''
 
 ## Resources
 
