@@ -118,7 +118,8 @@ So I had a few things I needed to do to resolve this issue.
   2. Deleted backend directory since it is now empty.
 7. The most difficult part of all of this is checking/updating my files to make sure that everything will work together.
   1. weather.js: This file was probably the most difficult for me to put together and keep up with. I knew from previous projects using .js that I needed to manage error handling. This slideshow presentation: https://www.slideshare.net/slideshow/enterprise-javascript-error-handling-presentation/630870 was extremely helpful in getting an idea of how I wanted to set everything up.. I welcome input on this as I'm still very inexperienced with java anything. The most difficult part was learning the child process of running a python file and then writing the code to execute the python script. I definitely copy and pasted this part and added my sanitized strings. The error handling was difficult to figure out. I ended up finding an image on google that had error codes along with descriptions and used that for writing my error messages.
-
+8. Well I got the netlify to deploy but still ran into the same issue. I htink that I need to recheck my build.sh.
+  1. I'm glad I checked this. I ran through the build logs for my netlify and figured instaed of using pyenv to install python 3.8 I would "manually install 3.8 and run app.py with the python command not python3. I have had this work for me in some situations so maybe i'll get lucky with this fix. 
 
 ## Resources
 

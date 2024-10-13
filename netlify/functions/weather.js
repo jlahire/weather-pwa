@@ -26,7 +26,7 @@ exports.handler = async function(event, context) {
     }
 
     // .exe Python
-    const pythonPath = path.join(process.env.LAMBDA_TASK_ROOT, 'python', 'bin', 'python3');
+    const pythonPath = path.join(process.env.LAMBDA_TASK_ROOT, 'python', 'bin', 'python');
     const scriptPath = path.join(process.env.LAMBDA_TASK_ROOT, 'app.py');
 
     const { stdout, stderr } = await execFilePromise(pythonPath, [
