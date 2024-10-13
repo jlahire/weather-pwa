@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required parameters' }) };
     }
 
-    // sanitize input, this was recommended by a friend.
+    // sanitize input, this was recommended by a stackoverflow for security for some reason...i don't fully understand it but i added it.
     const sanitizedZipcode = zipcode.replace(/[^a-zA-Z0-9]/g, '');
     const sanitizedCountry = country.replace(/[^a-zA-Z]/g, '');
     const sanitizedPeriod = parseInt(period, 10);
