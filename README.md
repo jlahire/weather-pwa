@@ -99,7 +99,7 @@ Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stdout: '',
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stderr: '/bin/sh: python3: command not found\n'
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  }
 ```
-Left me pretty distraught. I had zero idea how to fix this issue because what this tells me is that python isn't found in the environment where my Netlify function is funning which did not initailly make sense to me. 
+  1. Left me pretty distraught. I had zero idea how to fix this issue because what this tells me is that python isn't found in the environment where my Netlify function is funning which did not initailly make sense to me. 
 ---
 After doing a little research it turns out this is a common issue with Netlify.
 ---
