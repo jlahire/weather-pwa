@@ -82,7 +82,7 @@ README.md
 2. Realized the Heroku is no longer free so had to switch to Netlify as my backend host. I've done a lot of projects in the past with Netlify so I knew I needed to change a ton of things in these files. I had to redo my whole backend, dropped flask, and everything that was a Heroku thing and redid a lot of the styles. Redoing app.js/index.html was difficult because I don't really know .js or .html. For most of the information to build a Netlify backend I went to Vite PWA (see resources).
 3. Realizing that Netlify doesn't have great Python support. Unfortunately Netlify only supports Python 3.8...and I wrote this using Python 3.11...So I've got a few issues to figure out.
 Once I had my PWA up on Netlify I attempted to fetch some weather. Here is the error I got in my Netlify log: 
-'''
+```
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  Error: Error: Command failed: python3 app.py 30350 US 7
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  /bin/sh: python3: command not found
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR      at ChildProcess.exithandler (node:child_process:422:12)
@@ -98,7 +98,7 @@ Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    cmd: 'python3 app.py 30350 US 7',
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stdout: '',
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR    stderr: '/bin/sh: python3: command not found\n'
 Oct 12, 05:52:33 PM: 8f3cb5eb ERROR  }
-'''
+```
 Left me pretty distraught. I had zero idea how to fix this issue because what this tells me is that python isn't found in the environment where my Netlify function is funning which did not initailly make sense to me. 
 ---
 After doing a little research it turns out this is a common issue with Netlify.
@@ -121,7 +121,7 @@ So I had a few things I needed to do to resolve this issue.
 8. Well I got the netlify to deploy but still ran into the same issue. I htink that I need to recheck my build.sh.
   1. I'm glad I checked this. I ran through the build logs for my netlify and figured instaed of using pyenv to install python 3.8 I would "manually install 3.8 and run app.py with the python command not python3. I have had this work for me in some situations so maybe i'll get lucky with this fix. 
 9. Nope. Still can't figure out why this wont run app.py. Here is the error i'm getting now and I'm not sure it's much different from the last one that I got. 
-'''
+```
 Oct 12, 10:11:21 PM: 62582187 ERROR  Error: Error: spawn /var/task/python/bin/python ENOENT
 Oct 12, 10:11:21 PM: 62582187 ERROR      at ChildProcess._handle.onexit (node:internal/child_process:284:19)
 Oct 12, 10:11:21 PM: 62582187 ERROR      at onErrorNT (node:internal/child_process:477:16)
@@ -135,7 +135,7 @@ Oct 12, 10:11:21 PM: 62582187 ERROR      at process.processTicksAndRejections (n
   Oct 12, 10:11:21 PM: 62582187 ERROR    stdout: '',
   Oct 12, 10:11:21 PM: 62582187 ERROR    stderr: ''
   Oct 12, 10:11:21 PM: 62582187 ERROR  }
-'''
+```
 
 ## Resources
 
