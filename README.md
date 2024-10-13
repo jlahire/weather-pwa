@@ -126,15 +126,15 @@ Oct 12, 10:11:21 PM: 62582187 ERROR  Error: Error: spawn /var/task/python/bin/py
 Oct 12, 10:11:21 PM: 62582187 ERROR      at ChildProcess._handle.onexit (node:internal/child_process:284:19)
 Oct 12, 10:11:21 PM: 62582187 ERROR      at onErrorNT (node:internal/child_process:477:16)
 Oct 12, 10:11:21 PM: 62582187 ERROR      at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
-  Oct 12, 10:11:21 PM: 62582187 ERROR    errno: -2,
-  Oct 12, 10:11:21 PM: 62582187 ERROR    code: 'ENOENT',
-  Oct 12, 10:11:21 PM: 62582187 ERROR    syscall: 'spawn /var/task/python/bin/python',
-  Oct 12, 10:11:21 PM: 62582187 ERROR    path: '/var/task/python/bin/python',
-  Oct 12, 10:11:21 PM: 62582187 ERROR    spawnargs: [ '/var/task/app.py', '30120', 'US', '14' ],
-  Oct 12, 10:11:21 PM: 62582187 ERROR    cmd: '/var/task/python/bin/python /var/task/app.py 30120 US 14',
-  Oct 12, 10:11:21 PM: 62582187 ERROR    stdout: '',
-  Oct 12, 10:11:21 PM: 62582187 ERROR    stderr: ''
-  Oct 12, 10:11:21 PM: 62582187 ERROR  }
+Oct 12, 10:11:21 PM: 62582187 ERROR    errno: -2,
+Oct 12, 10:11:21 PM: 62582187 ERROR    code: 'ENOENT',
+Oct 12, 10:11:21 PM: 62582187 ERROR    syscall: 'spawn /var/task/python/bin/python',
+Oct 12, 10:11:21 PM: 62582187 ERROR    path: '/var/task/python/bin/python',
+Oct 12, 10:11:21 PM: 62582187 ERROR    spawnargs: [ '/var/task/app.py', '30120', 'US', '14' ],
+Oct 12, 10:11:21 PM: 62582187 ERROR    cmd: '/var/task/python/bin/python /var/task/app.py 30120 US 14',
+Oct 12, 10:11:21 PM: 62582187 ERROR    stdout: '',
+Oct 12, 10:11:21 PM: 62582187 ERROR    stderr: ''
+Oct 12, 10:11:21 PM: 62582187 ERROR  }
 ```
 
 ## Resources
