@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 import io
 import base64
 
+# def handler(request, response)
+
 def get_weather(zipcode, country, period):
     # data range stuff
     end_date = datetime.now()

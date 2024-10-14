@@ -258,6 +258,24 @@ cp -r $HOME/.netlify/venv/* .netlify/functions/python/
   command = "bash build.sh"
   ```
 19. Hopefully this works.
+  1. It worked but still got the path error. So now i'm going to be looking at altering my app.py to see what needs to change there.
+  2. I read through: https://www.netlify.com/platform/core/functions/ to get a better understanding of functions in general. 
+  3. Read through this document: https://daily.dev/blog/serverless-functions-netlify-a-beginners-guide 
+  4. I've heard of handler functions before. in the document above it talks about writing a function using a .js file. I'm going to look up if this is also a thing in python. https://stackoverflow.com/questions/58628653/what-are-handlers-in-python-in-plain-english 
+  5. in the serverless funcitons netlify beginners guide it give the handler function as 
+```
+exports.handler = async (event, context) => {
+return {
+  statusCode: 200,
+  body: JSON.stringify({
+    message: "Hello World"
+   })
+ }
+}
+```
+  6. But I'll have to come back to this. 
+
+
 ## Resources
 
 - Stack Overflow
