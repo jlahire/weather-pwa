@@ -13,9 +13,9 @@ nvm use 14
 
 # python stuff
 echo "Installing Python 3.8..."
-curl -O https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz
-tar xzf Python-3.8.12.tgz
-cd Python-3.8.12
+curl -O https://www.python.org/ftp/python/3.8/Python-3.8.tgz
+tar xzf Python-3.8.tgz
+cd Python-3.8
 ./configure --prefix=$HOME/.localpython --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6' LDFLAGS="-lgcc_s"
 make
 make install
