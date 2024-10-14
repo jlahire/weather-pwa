@@ -39,6 +39,7 @@ pip install -r requirements.txt
 # putting everything together
 mkdir -p .netlify/functions/python
 cp -r venv .netlify/functions/
+cp -r $HOME/.localpython .netlify/functions/python/
 cp app.py .netlify/functions/
 
 echo "Installation complete!"
