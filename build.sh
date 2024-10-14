@@ -19,6 +19,11 @@ make install
 cd ..
 export PATH=$PWD/python/bin:$PATH
 
+# virtual environment stuff
+echo "Creating virtual environment..."
+python -m venv venv
+source venv/bin/activate
+
 # normal python stuff
 python --version
 echo "Upgrading pip...almost done being annoying...."

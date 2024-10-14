@@ -157,6 +157,14 @@ Oct 12, 10:11:21 PM: 62582187 ERROR    stdout: '',
 Oct 12, 10:11:21 PM: 62582187 ERROR    stderr: ''
 Oct 12, 10:11:21 PM: 62582187 ERROR  }
 ```
+10. So after taking a break and coming back to it I realize that my virtual environment isn't working. So I went and spent a hour reading the venv library: https://docs.python.org/3/library/venv.html and found a ton of really helpful information there. Well...hopefully.
+  1. So I decided to add some venv stuff to my build.sh to see if this resolves the issue I'm running into. I got this directly from the doc above. 
+```
+# virtual environment stuff
+echo "Creating virtual environment..."
+python -m venv venv
+source venv/bin/activate
+```
 
 ## Resources
 
