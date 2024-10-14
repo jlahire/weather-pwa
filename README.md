@@ -230,6 +230,7 @@ Oct 13, 10:33:05 PM: d6b7fd1a ERROR  Error: Error: spawn /var/task/python/bin/py
   stderr: ''
 }
 ```
+15. maybe the issue is that I had my netlify.toml and runtime.txt using python 3.8 instead of python 3.8.12....
 ## Resources
 
 - Stack Overflow
