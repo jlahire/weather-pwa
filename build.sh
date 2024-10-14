@@ -13,7 +13,8 @@ nvm use 14
 echo "Installing Python 3.8...still being annoying...."
 curl https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz | tar xz
 cd Python-3.8.12
-./configure --prefix=$PWD/../python
+# added tcl and tk stuff
+./configure --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6'
 make
 make install
 cd ..

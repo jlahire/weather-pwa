@@ -165,6 +165,54 @@ echo "Creating virtual environment..."
 python -m venv venv
 source venv/bin/activate
 ```
+11. So I got a different error this time:
+```
+9:21:23 PM: "build.command" failed                                        
+9:21:23 PM: ────────────────────────────────────────────────────────────────
+9:21:23 PM: ​
+9:21:23 PM:   Error message
+9:21:23 PM:   Command failed with exit code 1: bash build.sh (https://ntl.fyi/exit-code-1)
+9:21:23 PM: ​
+9:21:23 PM:   Error location
+9:21:23 PM:   In build.command from netlify.toml:
+9:21:23 PM:   bash build.sh
+9:21:23 PM: ​
+9:21:23 PM:   Resolved config
+9:21:23 PM:   build:
+9:21:23 PM:     command: bash build.sh
+9:21:23 PM:     commandOrigin: config
+9:21:23 PM:     environment:
+9:21:23 PM:       - PYTHON_VERSION
+9:21:23 PM:     publish: /opt/build/repo/frontend
+9:21:23 PM:     publishOrigin: config
+9:21:23 PM:   functionsDirectory: /opt/build/repo/netlify/functions
+9:21:23 PM:   redirects:
+9:21:23 PM:     - from: /api/*
+      status: 200
+      to: /.netlify/functions/:splat
+  redirectsOrigin: config
+9:21:23 PM: Build failed due to a user error: Build script returned non-zero exit code: 2
+9:21:23 PM: Failing build: Failed to build site
+9:21:24 PM: Finished processing build request in 2m54.817s
+```
+I ran the debug function with Netlify and it came back with this:
+```
+Diagnosis
+The build failure is caused by the inability to locate Tcl/Tk libs and/or headers while trying to build the '_struct' extension in Python.
+
+Solution
+To resolve this issue, you need to install the required Tcl/Tk development libraries and headers. On Ubuntu/Debian-based systems, you can do this with the following command:
+
+sudo apt-get install tcl-dev tk-dev
+Once the necessary libraries are installed, you can retry the build process.
+```
+12. Soooooo I found some odd rabbit hole with Netlify that was somewhat resolved back in March of 2023: https://answers.netlify.com/t/headers-in-toml-not-applying/87328/9 
+  1. But after reading more I realized that it isn't related to my issue and I wasted an hour reading...
+  2. Seems like everthing related to an error with tcl and tk is all from 2012. So I looked up how to write a build process in python: https://packaging.python.org/en/latest/tutorials/packaging-projects/?form=MG0AV3 
+  3. So i'm going to try adding this line to my build.sh as part of the python stuff:
+```
+./configure --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6'
+```
 
 ## Resources
 
