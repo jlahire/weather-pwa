@@ -1,4 +1,3 @@
-import sys
 import json
 from noaa_sdk import NOAA
 import matplotlib.pyplot as plt
@@ -6,8 +5,38 @@ from datetime import datetime, timedelta
 import io
 import base64
 
-# def handler(request, response)
+# a lot of try and except because I have no idea what I'm doing here.
+def handler(event, context):
 
+    params = event['queryStringParameters']
+    zipcode = params.get('zipcode')
+    country = params.get('country')
+    period = params.get('period')
+
+    if not all([zipcode, country, period]):
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Missing required input'})
+        }
+
+    try:
+        period = int(period)
+    except ValueError:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Period must be an integer'})
+        }
+
+    result = get_weather(zipcode, country, period)
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(result),
+        'headers': {
+            'Content-Type': 'application/json'
+        }
+    }
+# same code from original app.py
 def get_weather(zipcode, country, period):
     # data range stuff
     end_date = datetime.now()
@@ -66,7 +95,6 @@ def generate_weather_plot(temp, humidity):
     
     return f"data:image/png;base64,{img_base64}"
 
-
 def generate_boxplot(temp, humidity):
     # yay complicated boxplot
     plt.figure(figsize=(10, 6))
@@ -82,14 +110,4 @@ def generate_boxplot(temp, humidity):
     
     return f"data:image/png;base64,{img_base64}"
 
-if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print(json.dumps({'error': 'Invalid arguments'}))
-        sys.exit(1)
-
-    zipcode = sys.argv[1]
-    country = sys.argv[2]
-    period = int(sys.argv[3])
-
-    result = get_weather(zipcode, country, period)
-    print(json.dumps(result))  # <-- hopefully Netlify catches this!
+  # <-- hopefully Netlify catches this!

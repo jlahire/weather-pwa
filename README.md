@@ -58,7 +58,7 @@ Updated file structure for Netlify:
 netlify.toml
 README.md
 ```
-New updated file structure:
+updated file structure:
 
 ```
 /frontend
@@ -72,6 +72,31 @@ New updated file structure:
 /netlify
   /functions
     weather.js
+app.py
+build.sh
+netlify.toml
+README.md
+requirements.txt
+runtime.txt
+```
+
+updated file structure again:
+
+```
+/frontend
+  /css
+    style.css
+  /js
+    app.js
+  icon.png
+  index.html
+  manifest.json
+  sw.js
+/netlify
+  /functions
+    python.toml
+    weather.js
+    weather.py
 app.py
 build.sh
 netlify.toml
@@ -259,10 +284,10 @@ cp -r $HOME/.netlify/venv/* .netlify/functions/python/
   ```
 19. Hopefully this works.
   1. It worked but still got the path error. So now i'm going to be looking at altering my app.py to see what needs to change there.
-  2. I read through: https://www.netlify.com/platform/core/functions/ to get a better understanding of functions in general. 
+  2. I read through: https://www.netlify.com/platform/core/functions/ to get a better understanding of netlify functions in general. 
   3. Read through this document: https://daily.dev/blog/serverless-functions-netlify-a-beginners-guide 
   4. I've heard of handler functions before. in the document above it talks about writing a function using a .js file. I'm going to look up if this is also a thing in python. https://stackoverflow.com/questions/58628653/what-are-handlers-in-python-in-plain-english 
-  5. in the serverless funcitons netlify beginners guide it give the handler function as 
+  5. In the serverless funcitons netlify beginners guide it give the handler function as 
 ```
 exports.handler = async (event, context) => {
 return {
@@ -273,7 +298,37 @@ return {
  }
 }
 ```
-  6. But I'll have to come back to this. 
+  6. But I'll have to come back to this.
+  7. Ok I'm back after a few hours. So I did a little digging and found this: https://docs.python.org/3/library/logging.handlers.html and this: https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
+20. After reading through those dev guides and docs I think I'm ready to start trying to write my own handler. Here is the format I'm thinking to use this schema for writing the handler function: (https://www.geeksforgeeks.org/lambda-function-handler-in-python/#)
+```
+import json
+
+def lambda_handler(event, context):
+    value_1 = event['key1']
+    value_2 = event['key2']
+    value_3 = event['key3']
+    
+    # Concatenating values
+    result = value_1 + value_2 + value_3
+    
+    # demonstrating context methods and properties
+    remaining_time = context.get_remaining_time_in_millis()
+    fun_name = context.function_name
+    fun_version = context.function_version
+    memory = context.memory_limit_in_mb
+    
+    return {
+        "StatusCode": 200,
+        "Concat_value": result,
+        "Remaining time": remaining_time,
+        "Function Name": fun_name,
+        "Function Version": fun_version,
+        "Memory allocated": memory
+    }
+```
+21. So I know that this is a lambda function, which i'm not really using, but i'm going to use this as a schema to build my own. I know I need to grab zipcode, country, and period data to send to noaa to get my data. I'm going to play with this for a while and see what I can get to work.
+22. Alright! I feel kinda confident. I used some examples from stack overflow to keep it as clean as possible. I also used this: https://www.geeksforgeeks.org/10-most-common-http-status-codes/ for my status codes so I could use the right ones.
 
 
 ## Resources
