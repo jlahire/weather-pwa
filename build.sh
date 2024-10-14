@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Exit on error
+# exit/debug
 set -e
 set -x
 
-# Install Node.js
+# node.js stuff
 echo "Installing Node.js..."
 curl -sL https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh -o install_nvm.sh
 bash install_nvm.sh
@@ -12,7 +12,7 @@ source ~/.nvm/nvm.sh
 nvm install 14
 nvm use 14
 
-# Install Python 3.8
+# python 3.8 stuff
 echo "Downloading Python 3.8..."
 curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
 echo "Verifying download..."
@@ -31,31 +31,25 @@ make
 make install
 cd ..
 
-# Add local Python to PATH
+# local PATH
 export PATH=$HOME/.localpython/bin:$PATH
+$HOME/.localpython/bin/python3.8 --version
 
-# Verify Python installation
-python3.8 --version
-
-# Create virtual environment
+# virtual environment stuff
 echo "Creating virtual environment..."
-python3.8 -m venv venv
+$HOME/.localpython/bin/python3.8 -m venv $HOME/.netlify/venv
+source $HOME/.netlify/venv/bin/activate
 
-# Activate virtual environment
-source venv/bin/activate
-
-# Normal Python setup
+# more python stuff
 python --version
 echo "Upgrading pip..."
 python -m pip install --upgrade pip
-
-# Install required Python packages
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
-# Copy everything to the Netlify functions directory
+# put everything in functions dir
 mkdir -p .netlify/functions/python
-cp -r venv .netlify/functions/
+cp -r $HOME/.netlify/venv .netlify/functions/
 cp -r $HOME/.localpython .netlify/functions/python/
 cp app.py .netlify/functions/
 

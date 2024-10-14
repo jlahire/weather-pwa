@@ -231,6 +231,7 @@ Oct 13, 10:33:05 PM: d6b7fd1a ERROR  Error: Error: spawn /var/task/python/bin/py
 }
 ```
 15. maybe the issue is that I had my netlify.toml and runtime.txt using python 3.8 instead of python 3.8.12....
+16. So I'm back at it with the same issue. This time I was able to get the correct URL for python 3.8.0. Still got the same error though, so I changed the venv path to be a local $HOME path like I had to change all the other paths to. Not sure how I forgot to change the venv path but lets see if this works...finger crossed...
 ## Resources
 
 - Stack Overflow
