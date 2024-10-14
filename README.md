@@ -213,7 +213,7 @@ Once the necessary libraries are installed, you can retry the build process.
 ```
 ./configure --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6'
 ```
-
+13. I feel like I'm getting closer. I got another build error in the same area, _struct. I went through the netlify debug again and got a compilation error in the python extensions modules. The debug suggested adding a flag to the linker command: -lgcc_s
 ## Resources
 
 - Stack Overflow
