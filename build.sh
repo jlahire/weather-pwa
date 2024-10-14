@@ -20,14 +20,11 @@ cd Python-3.8.12
 make
 make install
 cd ..
-# Add local Python to PATH
 export PATH=$HOME/.localpython/bin:$PATH
 
-# Create virtual environment
+# virtual environment
 echo "Creating virtual environment..."
 python3.8 -m venv venv
-
-# Activate virtual environment
 source venv/bin/activate
 
 # normal python stuff
