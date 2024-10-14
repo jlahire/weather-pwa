@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Exit
 set -e
+set -x
 
 # node stuff
 echo "Installing Node.js...because I'm annoying...."
