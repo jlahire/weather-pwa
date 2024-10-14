@@ -233,7 +233,31 @@ Oct 13, 10:33:05 PM: d6b7fd1a ERROR  Error: Error: spawn /var/task/python/bin/py
 15. maybe the issue is that I had my netlify.toml and runtime.txt using python 3.8 instead of python 3.8.12....
 16. So I'm back at it with the same issue. This time I was able to get the correct URL for python 3.8.0. Still got the same error though, so I changed the venv path to be a local $HOME path like I had to change all the other paths to. Not sure how I forgot to change the venv path but lets see if this works...finger crossed...
   1. So this didn't work either. I decided to add some commands to give me the directory to atleast confirm it's there. And I changed up the copy everything to functions part and trimmed off the local copy to see if that sorts out the issue. That was a copy&paste that I edited anyways so I'm not sure it was necessary. Fingers crossed. 
-  
+17. Still no luck, so i've returned to netlify docs to read more about python use with netlify functions: https://docs.netlify.com/configure-builds/manage-dependencies/#python 
+  1. I remember in the rabbit hole I went down previously that I though wasn't related mentioned needing to add "/*" to something for it to appropriately link or something like that. I'll revisit that discussion to see if it actually does relate.
+  2. So after revisiting that article I found something to try. I realize now that I'm able to see my direcory listings and where exactly python is in my build that adding the "/*" actually might fix this issue i've been running into. Here is the line in my build.sh that i'm editing:
+```
+cp -r $HOME/.netlify/venv/* .netlify/functions/python/
+```
+18. This "/*" homefully will just copy all the venv files directly into the .netlify/functions/python/ dir. 
+  1. Now i'm checking my .toml file to make sure it is using .netlify/function/python. 
+    1. DUDE!!!! MAYBE THIS IS THE ISSUE!?!?!
+  2. So I went to my .toml, which I haven't updated because everytime I changed something in there the build would fail. I hope that this is the issue: 
+  3. old .toml function path:
+  ```
+  [build]
+  publish = "frontend"
+  functions = "netlify/functions"
+  command = "bash build.sh"
+  ```
+  4. new .toml funciton path:
+  ```
+  [build]
+  publish = "frontend"
+  functions = "netlify/functions/python"
+  command = "bash build.sh"
+  ```
+19. Hopefully this works.
 ## Resources
 
 - Stack Overflow
