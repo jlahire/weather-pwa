@@ -14,12 +14,12 @@ nvm use 14
 
 # python stuff with error catching hopefully
 echo "Downloading Python 3.8..."
-curl -O https://www.python.org/ftp/python/3.8/Python-3.8.tgz
+curl -O https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz 
 echo "Verifying download..."
-if ! tar tzf Python-3.8.tgz >/dev/null; then
+if ! tar tzf Python-3.8.12.tgz >/dev/null; then
     echo "Download corrupted, retrying..."
-    curl -O https://www.python.org/ftp/python/3.8/Python-3.8.tgz
-    if ! tar tzf Python-3.8.tgz >/dev/null; then
+    curl -O https://www.python.org/ftp/python/3.8.12/Python-3.8.12.tgz
+    if ! tar tzf Python-3.8.12.tgz >/dev/null; then
         echo "Download failed again. Exiting..."
         exit 1
     fi
