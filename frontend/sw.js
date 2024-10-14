@@ -13,6 +13,7 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME)
             .then((cache) => cache.addAll(urlsToCache))
             .then(() => self.skipWaiting())
+            .catch((error) => console.error('Failed to open cache:', error))
     );
 });
 
@@ -27,6 +28,7 @@ self.addEventListener('activate', (event) => {
                 })
             );
         }).then(() => self.clients.claim())
+        .catch((error) => console.error('Failed to activate service worker:', error))
     );
 });
 
@@ -37,19 +39,16 @@ self.addEventListener('fetch', (event) => {
                 if (cachedResponse) {
                     return cachedResponse;
                 }
-
                 return fetch(event.request).then((response) => {
                     if (!response || response.status !== 200 || response.type !== 'basic') {
                         return response;
                     }
-
                     const responseToCache = response.clone();
                     caches.open(CACHE_NAME).then((cache) => {
                         cache.put(event.request, responseToCache);
-                    });
-
+                    }).catch((error) => console.error('Failed to cache response:', error));
                     return response;
-                });
+                }).catch((error) => console.error('Failed to fetch:', error));
             })
         );
     }

@@ -214,6 +214,22 @@ Once the necessary libraries are installed, you can retry the build process.
 ./configure --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6'
 ```
 13. I feel like I'm getting closer. I got another build error in the same area, _struct. I went through the netlify debug again and got a compilation error in the python extensions modules. The debug suggested adding a flag to the linker command: -lgcc_s
+14. So I was able to get the pwa to deploy but now i'm back to the issue with path. I'm adding some error handling to my service worker file, specifically to the fetch part because I think that's where the biggest issue is. Honestly though I'm not sure exactly where to look for the issue. Probably going to sleep on it and revisit tomorrow. Here is the current error I get from netlify when I attempt to "fetch weather":
+```
+Oct 13, 10:33:05 PM: d6b7fd1a ERROR  Error: Error: spawn /var/task/python/bin/python ENOENT
+    at ChildProcess._handle.onexit (node:internal/child_process:284:19)
+    at onErrorNT (node:internal/child_process:477:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'spawn /var/task/python/bin/python',
+  path: '/var/task/python/bin/python',
+  spawnargs: [ '/var/task/app.py', '30120', 'US', '7' ],
+  cmd: '/var/task/python/bin/python /var/task/app.py 30120 US 7',
+  stdout: '',
+  stderr: ''
+}
+```
 ## Resources
 
 - Stack Overflow
