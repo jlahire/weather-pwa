@@ -1,6 +1,6 @@
 [build]
   publish = "frontend"
-  functions = "netlify/functions/python"
+  functions = "netlify/functions"
   command = "bash build.sh"
 
 [dev]

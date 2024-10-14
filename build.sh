@@ -48,8 +48,8 @@ echo "Installing dependencies..."
 pip install -r requirements.txt
 
 # put everything in functions dir
-mkdir -p .netlify/functions/python
-cp -r $HOME/.netlify/venv/* .netlify/functions/python/
+mkdir -p .netlify/functions
+cp -r $HOME/.netlify/venv/* .netlify/functions/
 cp app.py .netlify/functions/
 
 # confirm directory structure because this is getting rediculous...
