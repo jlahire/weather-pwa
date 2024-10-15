@@ -96,8 +96,7 @@ updated file structure again:
   /functions
     python.toml
     weather.js
-    weather.py
-app.py
+weather.py
 build.sh
 netlify.toml
 README.md
