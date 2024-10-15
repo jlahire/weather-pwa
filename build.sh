@@ -47,12 +47,13 @@ python -m pip install --upgrade pip
 echo "Installing dependencies..."
 pip install -r requirements.txt
 
-# put everything in functions dir
-mkdir -p netlify/functions
-cp -r $HOME/.netlify/venv/* netlify/functions/
+# Create the correct directory structure and copy files
+mkdir -p netlify/functions/python
+cp -r $HOME/.netlify/venv/* netlify/functions/python/
+cp weather.py netlify/functions/python/
 
-# confirm directory structure because this is getting rediculous...
+# confirm directory structure
 echo "Directory structure:"
-find netlify/functions/python -type d
+find netlify/functions -type d
 
 echo "Installation complete!"
