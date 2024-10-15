@@ -331,6 +331,7 @@ def lambda_handler(event, context):
 22. Alright! I feel kinda confident. I used some examples from stack overflow to keep it as clean as possible. I also used this: https://www.geeksforgeeks.org/10-most-common-http-status-codes/ for my status codes so I could use the right ones.
 
 
+
 ## Resources
 
 - Stack Overflow
