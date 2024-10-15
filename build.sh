@@ -13,46 +13,31 @@ nvm install 14
 nvm use 14
 
 # python 3.8 stuff
-echo "Downloading Python 3.8..."
-curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
-echo "Verifying download..."
-if ! tar tzf Python-3.8.0.tgz >/dev/null; then
-    echo "Download corrupted, retrying..."
-    curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0.tgz
-    if ! tar tzf Python-3.8.0.tgz >/dev/null; then
-        echo "Download failed again. Exiting..."
-        exit 1
-    fi
-fi
-tar xzf Python-3.8.0.tgz
-cd Python-3.8.0
-./configure --prefix=$HOME/.localpython --with-tcltk-includes='-I/usr/include' --with-tcltk-libs='-L/usr/lib -ltcl8.6 -ltk8.6' LDFLAGS="-lgcc_s"
-make
-make install
-cd ..
+echo "Setting up Python..."
+# Use the Python version specified in runtime.txt
+PYTHON_VERSION=$(cat runtime.txt)
+pyenv install -s $PYTHON_VERSION
+pyenv global $PYTHON_VERSION
 
 # local PATH
 export PATH=$HOME/.localpython/bin:$PATH
 $HOME/.localpython/bin/python3.8 --version
 
 # virtual environment stuff
-echo "Creating virtual environment..."
-$HOME/.localpython/bin/python3.8 -m venv $HOME/.netlify/venv
-source $HOME/.netlify/venv/bin/activate
+echo "making a virtual environment..."
+python -m venv .venv
+source .venv/bin/activate
 
 # more python stuff
-python --version
-echo "Upgrading pip..."
 python -m pip install --upgrade pip
-echo "Installing dependencies..."
 pip install -r requirements.txt
 
 # put everything in functions dir
 mkdir -p netlify/functions
-cp -r $HOME/.netlify/venv/* netlify/functions/python/
+cp -r .venv netlify/functions/python
 cp weather.py netlify/functions/
 # confirm directory structure because this is getting rediculous...
 echo "Directory structure:"
 find netlify/functions -type d
 
-echo "Installation complete!"
+echo "Installation complete...hopefully"
