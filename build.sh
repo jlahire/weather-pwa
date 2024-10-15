@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 # put everything in functions dir
 mkdir -p netlify/functions
-cp -r $HOME/.netlify/venv/* netlify/functions/
+cp -r $HOME/.netlify/venv/* netlify/functions/python
 
 # confirm directory structure because this is getting rediculous...
 echo "Directory structure:"
