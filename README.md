@@ -1,3 +1,6 @@
+PROJECT CLOSED 11/05/2024 @jlahire
+
+
 # LaHire Weather PWA
 
 This project is an extension of my final project for CEIS110, figuring out the process of transforming a working Python application into a Progressive Web App (PWA) for easy mobile access. Because I dont have the time to learn how to make iOS/Android apps. Maybe down the road..
